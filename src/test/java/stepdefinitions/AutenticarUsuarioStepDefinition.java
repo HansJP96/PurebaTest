@@ -8,16 +8,16 @@ import io.cucumber.java.en.When;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import pages.init.WebPage;
+import pages.init.BaseWebPage;
 
 public class AutenticarUsuarioStepDefinition {
 
-    private WebPage webpage;
+    private BaseWebPage webpage;
     private static final Logger LOGGER = Logger.getLogger(AutenticarUsuarioStepDefinition.class);
 
     @Before
     public void openBrowser() {
-        webpage = new WebPage();
+        webpage = new BaseWebPage();
         LOGGER.info("Entrando");
     }
 

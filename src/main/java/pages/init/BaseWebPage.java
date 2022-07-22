@@ -11,12 +11,12 @@ import utils.LoggerSetUp;
 
 import java.time.Duration;
 
-public class BasePage extends LoggerSetUp {
-    WebDriver webDriver;
-    protected LoginPage loginPage;
-    protected LandingPage landingPage;
+public class BaseWebPage extends LoggerSetUp {
+    protected WebDriver webDriver;
+//    protected LoginPage loginPage;
+//    protected LandingPage landingPage;
 
-    public BasePage() {
+    public BaseWebPage() {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--incognito");
@@ -29,11 +29,25 @@ public class BasePage extends LoggerSetUp {
 
         this.webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //wait = new WebDriverWait(driver,10);
-        inicioPaginas();
     }
 
-    private void inicioPaginas() {
-        loginPage = new LoginPage(webDriver);
-        landingPage = new LandingPage(webDriver);
+    //Metodo cerra navegador
+    public void cerrarNavegador() {
+        webDriver.close();
+    }
+
+//    private void inicioPaginas() {
+//        loginPage = new LoginPage(webDriver);
+//        landingPage = new LandingPage(webDriver);
+//    }
+
+    public LoginPage onLoginPage() {
+//        return loginPage == null ? new LoginPage(webDriver) : loginPage;
+        return new LoginPage(webDriver);
+    }
+
+    public LandingPage onLandingPage() {
+//        return landingPage == null ? new LandingPage(webDriver) : landingPage;
+        return new LandingPage(webDriver);
     }
 }
