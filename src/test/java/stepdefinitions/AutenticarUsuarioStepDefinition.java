@@ -5,55 +5,69 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import org.apache.log4j.Logger;
 import org.junit.Assert;
-import pages.BasePage;
-import pages.LoginPage;
+import pages.init.WebPage;
 
-public class AutenticarUsuarioStepDefinition extends Setup {
+public class AutenticarUsuarioStepDefinition {
 
-    protected LoginPage loginPage;
-    protected BasePage basePage;
+    private WebPage webpage;
+    private static final Logger LOGGER = Logger.getLogger(AutenticarUsuarioStepDefinition.class);
 
     @Before
-    public void setup() {
-        basePage = new BasePage();
+    public void openBrowser() {
+        webpage = new WebPage();
+        LOGGER.info("Entrando");
     }
 
     @After
     public void tearDown() {
-        basePage.cerrarNavegador();
+        webpage.cerrarNavegador();
+        LOGGER.info("Cerrando navegador");
     }
-
-//    LoginPage loginPage = (LoginPage) basePage;
 
     @Given("que entro al sitio web")
     public void queEntroAlSitioWeb() {
-        loginPage.entrarASaucelabs();
+        webpage.
+                onLoginPage()
+                .entrarASauceLab();
     }
 
     @When("ingreso mis credenciales")
     public void ingresoMisCredenciales() {
-        loginPage.escribirUsuario();
-        loginPage.escribirContra();
-        loginPage.iniciarSesion();
+        webpage.
+                onLoginPage()
+                .escribirUsuario()
+                .escribirContra()
+                .iniciarSesion();
     }
 
     @Then("puedo entrar a la pagina a comprar")
     public void puedoEntrarALaPaginaAComprar() {
-        Assert.assertTrue(loginPage.validoEntroBien());
-        loginPage.cerrarNavegador();
+        Assert.assertTrue(
+                webpage
+                        .onLandingPage()
+                        .validoEntroBien()
+        );
     }
 
     @When("ingreso mis credenciales bloqueadas")
     public void ingresoMisCredencialesBloqueadas() {
-        loginPage.escribirUsuarioBloqueado();
-        loginPage.escribirContra();
-        loginPage.iniciarSesion();
+        webpage.
+                onLoginPage()
+                .escribirUsuarioBloqueado()
+                .escribirContra()
+                .iniciarSesion();
     }
 
     @Then("me aparece un mensaje de error")
     public void meApareceUnMensajeDeError() {
-        Assert.assertTrue(loginPage.validarMensajeError());
+        Assert.assertTrue(
+                webpage
+                        .onLoginPage()
+                        .validarMensajeError()
+        );
     }
 
 }

@@ -1,51 +1,56 @@
 package pages;
 
+import interactions.Acciones;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends Acciones {
 
-    public LoginPage() {
+    public LoginPage(WebDriver webDriver) {
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
     @FindBy(id = "user-name")
-    private WebElement USUARIO;
+    private WebElement usuario;
 
     @FindBy(id = "password")
-    private WebElement CONTRASENA;
+    private WebElement contrasena;
 
     @FindBy(id = "login-button")
-    private WebElement CONFIRMAR;
-
-    @FindBy(id = "header_container")
-    private WebElement ENTRO_BIEN;
+    private WebElement confirmar;
 
     @FindBy(xpath = "//*[@id=\"login_button_container\"]/div/form/div[3]/h3")
-    private WebElement MENSAJE_ERROR;
+    private WebElement mensajeError;
 
-    public void escribirUsuario() {
-        escribir(USUARIO, "standard_user");
+    public LoginPage entrarASauceLab() {
+        abrirPaginas("https://www.saucedemo.com/");
+        return this;
     }
 
-    public void escribirUsuarioBloqueado() {
-        escribir(USUARIO, "locked_out_user");
+    public LoginPage escribirUsuario() {
+        escribir(usuario, "standard_user");
+        return this;
     }
 
-    public void escribirContra() {
-        escribir(CONTRASENA, "secret_sauce");
+    public LoginPage escribirUsuarioBloqueado() {
+        escribir(usuario, "locked_out_user");
+        return this;
     }
 
-    public void iniciarSesion() {
-        clickElement(CONFIRMAR);
+    public LoginPage escribirContra() {
+        escribir(contrasena, "secret_sauce");
+        return this;
     }
 
-    public boolean validoEntroBien() {
-        return elementoVisible(ENTRO_BIEN);
+    public LoginPage iniciarSesion() {
+        clickElement(confirmar);
+        return this;
     }
 
     public boolean validarMensajeError() {
-        return elementoVisible(MENSAJE_ERROR);
+        return elementoVisible(mensajeError);
     }
 }
