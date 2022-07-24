@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LandingPage extends Acciones {
 
+
     public LandingPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

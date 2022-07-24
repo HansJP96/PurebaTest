@@ -37,4 +37,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+test{
+    maxParallelForks 3
+}
+
 gradle.startParameter.continueOnFailure = true

@@ -5,38 +5,37 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import pages.init.BaseWebPage;
 
 public class AutenticarUsuarioStepDefinition {
 
-    private BaseWebPage webpage;
+    private BaseWebPage webPage;
     private static final Logger LOGGER = Logger.getLogger(AutenticarUsuarioStepDefinition.class);
 
     @Before
     public void openBrowser() {
-        webpage = new BaseWebPage();
-        LOGGER.info("Entrando");
+        webPage = new BaseWebPage();
+        LOGGER.info("Abriendo navegador");
     }
 
     @After
     public void tearDown() {
-        webpage.cerrarNavegador();
+        webPage.cerrarNavegador();
         LOGGER.info("Cerrando navegador");
     }
 
     @Given("que entro al sitio web")
     public void queEntroAlSitioWeb() {
-        webpage.
+        webPage.
                 onLoginPage()
                 .entrarASauceLab();
     }
 
     @When("ingreso mis credenciales")
     public void ingresoMisCredenciales() {
-        webpage.
+        webPage.
                 onLoginPage()
                 .escribirUsuario()
                 .escribirContra()
@@ -46,7 +45,7 @@ public class AutenticarUsuarioStepDefinition {
     @Then("puedo entrar a la pagina a comprar")
     public void puedoEntrarALaPaginaAComprar() {
         Assert.assertTrue(
-                webpage
+                webPage
                         .onLandingPage()
                         .validoEntroBien()
         );
@@ -54,7 +53,7 @@ public class AutenticarUsuarioStepDefinition {
 
     @When("ingreso mis credenciales bloqueadas")
     public void ingresoMisCredencialesBloqueadas() {
-        webpage.
+        webPage.
                 onLoginPage()
                 .escribirUsuarioBloqueado()
                 .escribirContra()
@@ -64,7 +63,7 @@ public class AutenticarUsuarioStepDefinition {
     @Then("me aparece un mensaje de error")
     public void meApareceUnMensajeDeError() {
         Assert.assertTrue(
-                webpage
+                webPage
                         .onLoginPage()
                         .validarMensajeError()
         );
