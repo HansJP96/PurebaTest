@@ -28,9 +28,7 @@ public class AutenticarUsuarioStepDefinition {
 
     @Given("que entro al sitio web")
     public void queEntroAlSitioWeb() {
-        webPage.
-                onLoginPage()
-                .entrarASauceLab();
+        webPage.irAPaginaInicio();
     }
 
     @When("ingreso mis credenciales")

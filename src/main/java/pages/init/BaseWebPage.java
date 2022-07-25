@@ -12,7 +12,7 @@ import utils.LoggerSetUp;
 import java.time.Duration;
 
 public class BaseWebPage extends LoggerSetUp {
-    protected WebDriver webDriver;
+    private final WebDriver webDriver;
 //    protected LoginPage loginPage;
 //    protected LandingPage landingPage;
 
@@ -29,6 +29,10 @@ public class BaseWebPage extends LoggerSetUp {
 
         this.webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //wait = new WebDriverWait(driver,10);
+    }
+
+    public void irAPaginaInicio() {
+        webDriver.get("https://www.saucedemo.com/");
     }
 
     //Metodo cerra navegador
